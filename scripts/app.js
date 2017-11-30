@@ -1,6 +1,6 @@
 //创建应用模块
 
-var app = angular.module("yike",[]);
+var app = angular.module("yike",["Ctrls"]);//依赖的独立模块,由于控制器被独立成一个模块出来了
 
 //run方法的作用是在模块创建好之后直接执行
 //因为toggle切换页面的方法对所有页面都有效,所以将该方法绑定在根作用域上
@@ -19,8 +19,21 @@ app.run(["$rootScope",function($rootScope){
 		var dds = document.querySelectorAll("dd");	
 		if($rootScope.collapsed){
 			//如果值为true,表示显示
+			//遍历每一个dd,显示
+			for(var i=0;i<dds.length;i++){
+				//设置位置的移动
+				dds[i].style.transform = "translate(0)";
+				//时间差
+				dds[i].style.transitionDuration = i*0.5+"s";
+			}
 		}else{
 			//值为false,表示隐藏
+			for(var i=dds.length-1;i>=0;i--){
+				//设置位置的移动
+				dds[i].style.transform = "translate(-100%)";
+				//时间差
+				dds[i].style.transitionDuration = (dds.length-i)*0.5+"s";
+			}
 		}
 	}
 }]);

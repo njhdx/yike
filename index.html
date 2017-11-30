@@ -9,11 +9,12 @@
 	<script src="bower_components/angular/angular.min.js"></script>
 	<script src="bower_components/angular-route/angular-route.min.js"></script>
 	<script src="scripts/app.js"></script>
+	<script src="scripts/controller.js"></script>
 </head>
 <body>
 	<div class="viewport">
 		<!-- 侧边导航 -->
-		<div ng-class="{navs:true,collapse:collapsed}">
+		<div ng-class="{navs:true,collapse:collapsed}" ng-controller="navs">
 			<dl>
 				<dt class="login">
 					<div class="avatar">
@@ -21,34 +22,9 @@
 					</div>
 					<span>登录</span>
 				</dt>
-				<dd class="active">
-					<a href="./index.html" class="icon-home">
-						<span>今日一刻</span>
-					</a>
-				</dd>
-				<dd>
-					<a href="./older.html" class="icon-file-empty">
-						<span>往期内容</span>
-					</a>
-				</dd>
-				<dd>
-					<a href="./author.html" class="icon-pencil">
-						<span>热门作者</span>
-					</a>
-				</dd>
-				<dd>
-					<a href="./category.html" class="icon-menu">
-						<span>栏目浏览</span>
-					</a>
-				</dd>
-				<dd>
-					<a href="./favourite.html" class="icon-heart">
-						<span>我的喜欢</span>
-					</a>
-				</dd>
-				<dd>
-					<a href="./settings.html" class="icon-cog">
-						<span>设置</span>
+				<dd ng-class="{active:key==0}" ng-repeat="(key,n) in navs">
+					<a href="{{n.href}}" class="{{n.icon}}" ng-click="toggle()">
+						<span>{{n.text}}</span>
 					</a>
 				</dd>
 			</dl>
