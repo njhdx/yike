@@ -12,4 +12,47 @@ angular.module("Ctrls",[])
 		{"href":"#/favourite","icon":"icon-heart","text":"我的喜欢"},
 		{"href":"#/settings","icon":"icon-cog","text":"设置"}
 	];
-}]);
+}])
+
+//index控制器
+.controller("indexCtrl",["$rootScope","$filter",function($rootScope,$filter){
+	$rootScope.num=0;
+	var time = new Date();
+	$rootScope.timeStr = $filter("date")(time,'yyyy-MM-dd');
+	$rootScope.title = "今日一刻"
+}])
+
+.controller("olderCtrl",["$rootScope","$filter",function($rootScope,$filter){
+	$rootScope.num=1;
+	var time = new Date();
+	$rootScope.timeStr = $filter("date")(time,'yyyy-MM-dd');
+	$rootScope.title = "往期内容"
+}])
+
+.controller("authorCtrl",["$rootScope","$filter",function($rootScope,$filter){
+	$rootScope.num=2;
+	var time = new Date();
+	$rootScope.timeStr = $filter("date")(time,'yyyy-MM-dd');
+	$rootScope.title = "热门作者"
+}])
+
+.controller("categoryCtrl",["$rootScope","$filter",function($rootScope,$filter){
+	$rootScope.num=3;
+	var time = new Date();
+	$rootScope.timeStr = $filter("date")(time,'yyyy-MM-dd');
+	$rootScope.title = "栏目浏览"
+}])
+
+.controller("favouriteCtrl",["$rootScope","$filter",function($rootScope,$filter){
+	$rootScope.num=4;
+	var time = new Date();
+	$rootScope.timeStr = $filter("date")(time,'yyyy-MM-dd');
+	$rootScope.title = "我的喜欢"
+}])
+
+.controller("settingsCtrl",["$rootScope","$filter",function($rootScope,$filter){
+	$rootScope.num=5;
+	var time = new Date();
+	$rootScope.timeStr = $filter("date")(time,'yyyy-MM-dd');
+	$rootScope.title = "设置"
+}])
