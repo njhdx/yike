@@ -15,39 +15,71 @@ angular.module("Ctrls",[])
 }])
 
 //index控制器
-.controller("indexCtrl",["$rootScope","$filter",function($rootScope,$filter){
+.controller("indexCtrl",["$rootScope","$filter","$http","$scope",function($rootScope,$filter,$http,$scope){
 	$rootScope.num=0;
 	var time = new Date();
 	$rootScope.timeStr = $filter("date")(time,'yyyy-MM-dd');
 	$rootScope.title = "今日一刻"
+	//显示加载图片
+	$rootScope.loading = true;
+	//发送请求
+	$http({
+		url:"./api/index.php",//由于在页面显示,所以地址还是从index页面开始找
+		params:{"time":$rootScope.timeStr}
+	}).then(function(data){
+		// console.log(data.data.posts);
+		$scope.posts = data.data.posts;
+		//获得数据后加载图片消失
+		$rootScope.loading = false;
+	})
 }])
 
-.controller("olderCtrl",["$rootScope","$filter",function($rootScope,$filter){
+.controller("olderCtrl",["$rootScope","$filter","$http","$scope",function($rootScope,$filter,$http,$scope){
 	$rootScope.num=1;
-	var time = new Date();
-	$rootScope.timeStr = $filter("date")(time,'yyyy-MM-dd');
-	$rootScope.title = "往期内容"
+	$rootScope.title = "往期内容";
+	$rootScope.loading = true;
+	$http({
+		url:"./api/older.php",//由于在页面显示,所以地址还是从index页面开始找
+	}).then(function(data){
+		// console.log(data.data[1].posts);
+		$scope.postss=data.data[1].posts;
+		$scope.time = data.data[0];
+		$rootScope.loading = false;
+	})
 }])
 
-.controller("authorCtrl",["$rootScope","$filter",function($rootScope,$filter){
+.controller("authorCtrl",["$rootScope","$filter","$http","$scope",function($rootScope,$filter,$http,$scope){
 	$rootScope.num=2;
-	var time = new Date();
-	$rootScope.timeStr = $filter("date")(time,'yyyy-MM-dd');
-	$rootScope.title = "热门作者"
+	$rootScope.textStr = "本周推荐";
+	$rootScope.title = "热门作者";
+	$rootScope.loading = true;
+	$http({
+		url:"./api/author.php",//由于在页面显示,所以地址还是从index页面开始找
+	}).then(function(data){
+		$scope.authors = data.data[0].authors;
+		$scope.authorss = data.data[1].authors;
+		$rootScope.loading = false;
+	})
 }])
 
-.controller("categoryCtrl",["$rootScope","$filter",function($rootScope,$filter){
+.controller("categoryCtrl",["$rootScope","$filter","$http","$scope",function($rootScope,$filter,$http,$scope){
 	$rootScope.num=3;
-	var time = new Date();
-	$rootScope.timeStr = $filter("date")(time,'yyyy-MM-dd');
-	$rootScope.title = "栏目浏览"
+	$rootScope.title = "栏目浏览";
+	$http({
+		url:"./api/category.php",
+	}).then(function(data){
+		$scope.category = data.data.columns;
+	})
 }])
 
-.controller("favouriteCtrl",["$rootScope","$filter",function($rootScope,$filter){
+.controller("favouriteCtrl",["$rootScope","$filter","$http","$scope",function($rootScope,$filter,$http,$scope){
 	$rootScope.num=4;
-	var time = new Date();
-	$rootScope.timeStr = $filter("date")(time,'yyyy-MM-dd');
-	$rootScope.title = "我的喜欢"
+	$rootScope.title = "我的喜欢";
+	$http({
+		url:"./api/favourite.php",
+	}).then(function(data){
+		$scope.favourite = data.data.posts;
+	})
 }])
 
 .controller("settingsCtrl",["$rootScope","$filter",function($rootScope,$filter){

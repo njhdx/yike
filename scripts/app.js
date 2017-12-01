@@ -16,7 +16,7 @@ app.run(["$rootScope",function($rootScope){
 		$rootScope.collapsed = !$rootScope.collapsed;
 		//将导航栏的小标题添加显示和隐藏效果
 		//获取所有的dd,循环遍历每一个dd,修改dd的样式,达到显示隐藏的效果
-		var dds = document.querySelectorAll("dd");	
+		var dds = document.querySelectorAll("#menus dd");	
 		if($rootScope.collapsed){
 			//如果值为true,表示显示
 			//遍历每一个dd,显示

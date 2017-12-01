@@ -14,7 +14,7 @@
 <body>
 	<div class="viewport">
 		<!-- 侧边导航 -->
-		<div ng-class="{navs:true,collapse:collapsed}" ng-controller="navs">
+		<div id="menus" ng-class="{navs:true,collapse:collapsed}" ng-controller="navs">
 			<dl>
 				<dt class="login">
 					<div class="avatar">
@@ -42,6 +42,10 @@
 			</div>
 			<!-- 主体 -->
 			<div ng-class="{body:true,collapse:collapsed}">
+				<!-- 显示加载图片,未获取数据时,就显示图片,获取到数据后,图片消失 -->
+				<div ng-if="loading">
+					<img src="public/images/loading.gif">
+				</div>
 				<div ng-view></div>
 			</div>
 		</div>
